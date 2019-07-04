@@ -23,7 +23,7 @@ namespace ThreeStrikesAPI
         {
             if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
             {
-                services.AddDbContext<ThreeStrikesItemContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ThreeStrikesConnection")));
+                services.AddDbContext<ThreeStrikesItemContext>(options => options.UseSqlServer(Configuration.GetConnectionString("azure db")));
             }
             else
             {
