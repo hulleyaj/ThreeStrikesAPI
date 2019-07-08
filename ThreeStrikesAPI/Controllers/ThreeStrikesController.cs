@@ -23,15 +23,20 @@ namespace ThreeStrikesAPI.Controllers
             {
                 // Create a new ThreeStrikesItems if collection is empty,
                 // which means you can't delete all ThreeStrikesItems.
-                _context.ThreeStrikesItems.Add(new ThreeStrikesItem { Item = "Empty", Price = 0 });
+                _context.ThreeStrikesItems.Add(new ThreeStrikesItem { Id = 1, Item = "Test Item", Price = 123456 });
                 _context.SaveChanges();
             }
         }
 
         // GET: api/ThreeStrikes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ThreeStrikesItem>>> GetThreeStrikesItems()
+        public async Task<ActionResult<IEnumerable<ThreeStrikesItem>>> GetThreeStrikesItems([FromQuery(Name = "item")] string item)
         {
+            if (!string.IsNullOrWhiteSpace(item))
+            {
+                return await _context.ThreeStrikesItems.Where(f => f.Item.Equals(item, System.StringComparison.OrdinalIgnoreCase)).ToListAsync();
+            }
+
             return await _context.ThreeStrikesItems.ToListAsync();
         }
 
@@ -48,15 +53,6 @@ namespace ThreeStrikesAPI.Controllers
 
             return threeStrikesItem;
         }
-
-        // Get: api/ThreeStrikes?item=ferrari
-        //[HttpGet()]
-        //public async Task<ActionResult<ThreeStrikesItem>> GetThreeStrikesItemByName([FromQuery(Name = "item")] string item)
-        //{
-        //    ThreeStrikesItem threeStrikesItem = await _context.ThreeStrikesItems.
-
-        //    return threeStrikesItem;
-        //}
 
         //// POST api/<controller>
         //[HttpPost]

@@ -28,6 +28,10 @@ namespace ThreeStrikesAPI
             else
             {
                 services.AddDbContext<ThreeStrikesItemContext>(opt => opt.UseInMemoryDatabase("ThreeStrikesList"));
+                services.AddCors(options => options.AddPolicy("LocalHostPolicy", builder =>
+                {
+                    builder.WithOrigins("http://localhost:19006").AllowAnyMethod().AllowAnyHeader();
+                }));
             }
 
 
@@ -47,6 +51,11 @@ namespace ThreeStrikesAPI
             else
             {
                 app.UseHsts();
+            }
+
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+            {
+                app.UseCors("LocalHostPolicy");
             }
 
             app.UseHttpsRedirection();
