@@ -24,6 +24,7 @@ namespace ThreeStrikesAPI.Controllers
                 // Create a new ThreeStrikesItems if collection is empty,
                 // which means you can't delete all ThreeStrikesItems.
                 _context.ThreeStrikesItems.Add(new ThreeStrikesItem { Id = 1, Item = "Test Item", Price = 123456 });
+                _context.ThreeStrikesItems.Add(new ThreeStrikesItem { Id = 2, Item = "Test Item2", Price = 234567 });
                 _context.SaveChanges();
             }
         }
