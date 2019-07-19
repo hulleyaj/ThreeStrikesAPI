@@ -30,10 +30,7 @@ namespace ThreeStrikesAPI
                 services.AddDbContext<ThreeStrikesItemContext>(opt => opt.UseInMemoryDatabase("ThreeStrikesList"));
                 services.AddCors(options => options.AddPolicy("LocalHostPolicy", builder =>
                 {
-                    builder.WithOrigins(new[] {
-                        "http://localhost:19006",
-                        "http://127.0.0.1:19006",
-                        "http://192.168.1.119:19006" }).AllowAnyMethod().AllowAnyHeader();
+                    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
                 }));
             }
 
