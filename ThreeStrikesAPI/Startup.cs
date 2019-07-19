@@ -28,12 +28,12 @@ namespace ThreeStrikesAPI
             else
             {
                 services.AddDbContext<ThreeStrikesItemContext>(opt => opt.UseInMemoryDatabase("ThreeStrikesList"));
-                services.AddCors(options => options.AddPolicy("LocalHostPolicy", builder =>
-                {
-                    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-                }));
             }
 
+            services.AddCors(options => options.AddPolicy("AllowAll", builder =>
+            {
+                builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+            }));
 
             // Automatically perform database migration
             //services.BuildServiceProvider().GetService<MyDatabaseContext>().Database.Migrate();
@@ -53,11 +53,7 @@ namespace ThreeStrikesAPI
                 app.UseHsts();
             }
 
-            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
-            {
-                app.UseCors("LocalHostPolicy");
-            }
-
+            app.UseCors("AllowAll");
             app.UseHttpsRedirection();
             app.UseMvc();
         }
