@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ThreeStrikesAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
+using ThreeStrikesAPI.Middleware;
 
 namespace ThreeStrikesAPI
 {
@@ -55,6 +56,7 @@ namespace ThreeStrikesAPI
 
             app.UseCors("AllowAll");
             app.UseHttpsRedirection();
+            app.UseMiddleware<AuthenticationMiddleware>();
             app.UseMvc();
         }
     }
