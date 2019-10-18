@@ -25,10 +25,12 @@ namespace ThreeStrikesAPI
             if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
             {
                 services.AddDbContext<ThreeStrikesItemContext>(options => options.UseSqlServer(Configuration.GetConnectionString("azure db")));
+                services.AddDbContext<ExpoTokenContext>(options => options.UseSqlServer(Configuration.GetConnectionString("azure db")));
             }
             else
             {
                 services.AddDbContext<ThreeStrikesItemContext>(opt => opt.UseInMemoryDatabase("ThreeStrikesList"));
+                services.AddDbContext<ExpoTokenContext>(opt => opt.UseInMemoryDatabase("ExpoTokensList"));
             }
 
             services.AddCors(options => options.AddPolicy("AllowAll", builder =>
