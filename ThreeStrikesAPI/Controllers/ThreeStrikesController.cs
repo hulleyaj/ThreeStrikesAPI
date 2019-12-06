@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +20,7 @@ namespace ThreeStrikesAPI.Controllers
         {
             _context = context;
 
-            if (_context.ThreeStrikesItems.Count() == 0)
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") != "Production" && _context.ThreeStrikesItems.Count() == 0)
             {
                 // Create a new ThreeStrikesItems if collection is empty,
                 // which means you can't delete all ThreeStrikesItems.

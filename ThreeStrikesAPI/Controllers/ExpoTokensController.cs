@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ThreeStrikesAPI.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace ThreeStrikesAPI.Controllers
 {
@@ -17,7 +18,7 @@ namespace ThreeStrikesAPI.Controllers
         {
             _context = context;
 
-            if (_context.ExpoTokens.Count() == 0)
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") != "Production" && _context.ExpoTokens.Count() == 0)
             {
                 _context.ExpoTokens.Add(new ExpoToken { Id = 1, Token = "999" });
                 _context.SaveChanges();
