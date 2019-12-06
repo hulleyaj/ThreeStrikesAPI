@@ -52,34 +52,33 @@ namespace ThreeStrikesAPI.Controllers
             }
             else
             {
-                expoToken.Id = token.Id;
-                return await PutExpoToken(expoToken);
+                return Ok();
             }     
         }
 
         // PUT: api/ExpoTokens
-        [HttpPut]
-        public async Task<ActionResult<ExpoToken>> PutExpoToken([FromBody]ExpoToken expoToken)
-        {
-            _context.Entry(expoToken).State = EntityState.Modified;
+        //[HttpPut]
+        //public async Task<ActionResult<ExpoToken>> PutExpoToken([FromBody]ExpoToken expoToken)
+        //{
+        //    _context.Entry(expoToken).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!_context.ExpoTokens.Any(f => f.Token == expoToken.Token))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!_context.ExpoTokens.Any(f => f.Token == expoToken.Token))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
     }
 }
