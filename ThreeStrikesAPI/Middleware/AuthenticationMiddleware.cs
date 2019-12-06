@@ -30,7 +30,13 @@ namespace ThreeStrikesAPI.Middleware
                 var username = usernamePassword.Substring(0, seperatorIndex);
                 var password = usernamePassword.Substring(seperatorIndex + 1);
 
-                if (username == Environment.GetEnvironmentVariable("API_AUTH_NAME") && 
+                if (context.Request.Path.StartsWithSegments(new PathString("/api/PushNotifications"), StringComparison.OrdinalIgnoreCase) &&
+                    username == Environment.GetEnvironmentVariable("API_AUTH_NAME_PUSH_NOTIFICATION") &&
+                    password == Environment.GetEnvironmentVariable("API_AUTH_PASS_PUSH_NOTIFICATION"))
+                {
+                    await _next.Invoke(context);
+                }
+                else if (username == Environment.GetEnvironmentVariable("API_AUTH_NAME") && 
                     password == Environment.GetEnvironmentVariable("API_AUTH_PASS"))
                 {
                     await _next.Invoke(context);

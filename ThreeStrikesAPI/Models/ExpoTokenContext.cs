@@ -2,7 +2,7 @@
 
 namespace ThreeStrikesAPI.Models
 {
-    public class ExpoTokenContext :DbContext
+    public class ExpoTokenContext : DbContext
     {
         public ExpoTokenContext(DbContextOptions<ExpoTokenContext> options)
             : base(options)
